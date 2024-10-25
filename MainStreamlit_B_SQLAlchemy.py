@@ -19,7 +19,6 @@ with st.sidebar:
 
 if selected == 'Klasifikasi':
     st.title('Klasifikasi')
-    st.write('Untuk Inputan File dataset (csv) bisa menggunakan st.file_uploader')
     file = st.file_uploader('Masukkan File', type=['csv', 'txt'])
 
     LuasTanah = st.number_input('Input luas tanah dalam meter persegi (squaremeters): ', 0)
