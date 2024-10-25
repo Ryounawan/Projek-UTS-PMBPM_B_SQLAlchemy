@@ -1,25 +1,16 @@
 import os
 import pickle
-
 import streamlit as st
 from streamlit_option_menu import option_menu
 
 model_path = 'BestModel_CLF_RandomForest_SQLAlchemy.pkl'
 model_path2 = 'BestModel_REG_RandomForest_SQLAlchemy.pkl'
 
-model = os.path.join(model_path, 'rb')
-with open(model, 'rb') as f:
+with open(model_path, 'rb') as f:
     lr_model = pickle.load(f)
 
-model2 = os.path.join(model_path2, 'rb')
-with open(model2, 'rb') as f:
+with open(model_path2, 'rb') as f:
     svr_model = pickle.load(f)
-
-# with open(lr_model_path, 'rb') as f:
-#     lr_model = pickle.load(f)
-
-# with open(svr_model_path, 'rb') as f:
-#     svr_model = pickle.load(f)
 
 with st.sidebar:
     selected = option_menu('Tutorial Desain Streamlit UTS ML 24/25',
@@ -28,7 +19,6 @@ with st.sidebar:
 
 if selected == 'Klasifikasi':
     st.title('Klasifikasi')
-
     st.write('Untuk Inputan File dataset (csv) bisa menggunakan st.file_uploader')
     file = st.file_uploader('Masukkan File', type=['csv', 'txt'])
 
@@ -62,16 +52,12 @@ if selected == 'Klasifikasi':
         Basement, Loteng, Garasi, input_gudangY, 1 - input_gudangY, RuangTamu
     ]]
 
-    st.write(f"Shape of input data: {len(input_data[0])} features")
-    
     if st.button("Cek Kategori"):
-            lr_model_prediction = lr_model.predict(input_data)
-            st.write(f"Prediksi Model : {lr_model_prediction}")
-
+        lr_model_prediction = lr_model.predict(input_data)
+        st.write(f"Prediksi Model : {lr_model_prediction}")
 
 if selected == 'Regresi':
     st.title('Regresi')
-
     st.write('Untuk Inputan File dataset (csv) bisa menggunakan st.file_uploader')
     file = st.file_uploader('Masukkan File', type=['csv', 'txt'])
 
@@ -92,48 +78,18 @@ if selected == 'Regresi':
     Gudang = st.radio('Apakah memiliki Gudang (hasstorageroom)?', ['Yes', 'No'])
     RuangTamu = st.slider('Input Ruang Tamu (hasguestroom): ', 0, 10)
 
-    if Halaman == "Yes":
-        input_halamanY = 1
-        input_halamanN = 0
-    else:
-        input_halamanY = 0
-        input_halamanN = 1
-
-    if KolamRenang == "Yes":
-        input_kolamRenangY = 1
-        input_kolamRenangN = 0
-    else:
-        input_kolamRenangY = 0
-        input_kolamRenangN = 1
-    
-    if GedungBaru == "New":
-        input_gedungBaruY = 1
-        input_gedungBaruN = 0
-    elif GedungBaru == "Old":
-        input_gedungBaruY = 0
-        input_gedungBaruN = 1
-
-    if PelindungBadai == "Yes":
-        input_pelindungBadaiY = 1
-        input_pelindungBadaiN = 0
-    else:
-        input_pelindungBadaiY = 0
-        input_pelindungBadaiN = 1
-
-    if Gudang == "Yes":
-        input_gudangY = 1
-        input_gudangN = 0
-    else:
-        input_gudangY = 0
-        input_gudangN = 1
+    input_halamanY = 1 if Halaman == "Yes" else 0
+    input_kolamRenangY = 1 if KolamRenang == "Yes" else 0
+    input_gedungBaruY = 1 if GedungBaru == "New" else 0
+    input_pelindungBadaiY = 1 if PelindungBadai == "Yes" else 0
+    input_gudangY = 1 if Gudang == "Yes" else 0
 
     input_data = [[
-        LuasTanah, JumlahKamar, input_halamanY, input_halamanN, input_kolamRenangY, input_kolamRenangN,
+        LuasTanah, JumlahKamar, input_halamanY, 1 - input_halamanY, input_kolamRenangY, 1 - input_kolamRenangY,
         JumlahLantai, KodeLokasi, CityPartRange, JumlahPemilik, TahunPembuatan, 
-        input_gedungBaruY, input_gedungBaruN, input_pelindungBadaiY, input_pelindungBadaiN, Basement, Loteng, Garasi, 
-        input_gudangY, input_gudangN, RuangTamu
+        input_gedungBaruY, 1 - input_gedungBaruY, input_pelindungBadaiY, 1 - input_pelindungBadaiY, 
+        Basement, Loteng, Garasi, input_gudangY, 1 - input_gudangY, RuangTamu
     ]]
-
 
     if st.button("Prediksi Price"):
         svr_model_prediction = svr_model.predict(input_data)
