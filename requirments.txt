@@ -1,5 +1,5 @@
 streamlit
-scikit_learn
-numpy
+scikit-learn
 pandas
+numpy
 streamlit-option-menu
