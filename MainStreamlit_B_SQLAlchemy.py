@@ -92,12 +92,3 @@ if selected == 'Regresi':
     if st.button("Prediksi Price"):
         svr_model_prediction = svr_model.predict(input_data)
         st.markdown(f"Prediksi Harga properti : $ {svr_model_prediction[0]:.1f}")
-
-if selected == 'Catatan':
-    st.title('Catatan')
-    st.write('Untuk memunculkan sidebar agar tidak error ketika di run, silahkan install library streamlit option menu dengan perintah "pip install streamlit-option-menu".')
-    st.write('Pada contoh di atas ada 2 yaitu Klasifikasi dan Regresi.')
-    st.write('Silahkan sesuaikan dengan arsitektur code anda pada notebook.')
-    st.write('Untuk lebih lanjut bisa di akses pada https://streamlit.io/')
-    st.write('Link desain streamlit dapat diakses pada https://aputsc-6jzfv4fiuzj84mfc7k7.streamlit.app/')
-    st.write('Untuk requirements yang dibutuhkan untuk deploy online di github ada 5 yaitu streamlit, scikit-learn, pandas, numpy, streamlit-option-menu.')
