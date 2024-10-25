@@ -14,7 +14,7 @@ with open(model_path2, 'rb') as f:
 
 with st.sidebar:
     selected = option_menu('SQLAlchemy UTS ML 24/25',
-                            ['Klasifikasi', 'Regresi', 'Catatan'],
+                            ['Klasifikasi', 'Regresi'],
                             default_index=0)
 
 if selected == 'Klasifikasi':
