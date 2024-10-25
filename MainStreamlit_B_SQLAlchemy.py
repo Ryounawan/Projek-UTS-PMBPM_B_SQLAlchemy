@@ -13,7 +13,7 @@ with open(model_path2, 'rb') as f:
     svr_model = pickle.load(f)
 
 with st.sidebar:
-    selected = option_menu('Tutorial Desain Streamlit UTS ML 24/25',
+    selected = option_menu('SQLAlchemy UTS ML 24/25',
                             ['Klasifikasi', 'Regresi', 'Catatan'],
                             default_index=0)
 
