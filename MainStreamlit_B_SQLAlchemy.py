@@ -57,7 +57,6 @@ if selected == 'Klasifikasi':
 
 if selected == 'Regresi':
     st.title('Regresi')
-    st.write('Untuk Inputan File dataset (csv) bisa menggunakan st.file_uploader')
     file = st.file_uploader('Masukkan File', type=['csv', 'txt'])
 
     LuasTanah = st.number_input('Input luas tanah dalam meter persegi (squaremeters): ', 0)
@@ -92,7 +91,7 @@ if selected == 'Regresi':
 
     if st.button("Prediksi Price"):
         svr_model_prediction = svr_model.predict(input_data)
-        st.markdown(f"Prediksi Harga properti : $ {svr_model_prediction[0]:.2f}")
+        st.markdown(f"Prediksi Harga properti : $ {svr_model_prediction[0]:.1f}")
 
 if selected == 'Catatan':
     st.title('Catatan')
